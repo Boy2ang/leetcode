@@ -15,8 +15,8 @@ import java.util.Map;
  */
 public class TowSumSolution {
     public static void main(String[] args) {
-        int[] nums = {2, 7, 11, 15};
-        int target = 9;
+        int[] nums = {1, 5, 11, 15, 100, 200};
+        int target = 2;
         int[] result = new TowSumSolution().towSum(nums, target);
         System.out.println(result);
     }
@@ -39,14 +39,21 @@ public class TowSumSolution {
         int[] result = new int[2];
 
         for (int i = 0; i < nums.length; i++) {
+            /**
+             * map.put(nums[i], i);不能放这里，比如想下面这种情况，就会返回[0,0],那么就不正确了。
+             * int[] nums = {1, 5, 11, 15, 100, 200};
+             * int target = 2;
+             */
+            // map.put(nums[i], i);
             int n1 = target - nums[i];
             if (map.containsKey(n1)) {
                 result[0] = map.get(n1);
                 result[1] = i;
                 return result;
-            } else {
-                map.put(nums[i], i);
             }
+            // 只能放这里
+            map.put(nums[i], i);
+
         }
 
         return null;
